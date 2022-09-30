@@ -1,0 +1,117 @@
+{"properties": [
+  {
+    "name": "oracle.datasource.url",
+    "type": "java.lang.String",
+    "description": "A description for 'oracle.datasource.url'"
+  },
+  {
+    "name": "oracle.datasource.username",
+    "type": "java.lang.String",
+    "description": "A description for 'oracle.datasource.username'"
+  },
+  {
+    "name": "oracle.datasource.password",
+    "type": "java.lang.String",
+    "description": "A description for 'oracle.datasource.password'"
+  },
+  {
+    "name": "oracle.datasource.driver-class-name",
+    "type": "java.lang.String",
+    "description": "A description for 'oracle.datasource.driver-class-name'"
+  },
+  {
+    "name": "oracle.jpa.database-platform",
+    "type": "java.lang.String",
+    "description": "A description for 'oracle.jpa.database-platform'"
+  },
+  {
+    "name": "hibernate.hbm2ddl.auto",
+    "type": "java.lang.String",
+    "description": "A description for 'hibernate.hbm2ddl.auto'"
+  },
+  {
+    "name": "oracle.hbm2ddl.auto",
+    "type": "java.lang.String",
+    "description": "A description for 'oracle.hbm2ddl.auto'"
+  },
+  {
+    "name": "spring.datasource-primary.jpa.database-platform",
+    "type": "java.lang.String",
+    "description": "A description for 'spring.datasource-primary.jpa.database-platform'"
+  },
+  {
+    "name": "spring.datasource-primary.hbm2ddl.auto",
+    "type": "java.lang.String",
+    "description": "A description for 'spring.datasource-primary.hbm2ddl.auto'"
+  },
+  {
+    "name": "hr.jpa.database-platform",
+    "type": "java.lang.String",
+    "description": "A description for 'hr.jpa.database-platform'"
+  },
+  {
+    "name": "hr.hbm2ddl.auto",
+    "type": "java.lang.String",
+    "description": "A description for 'hr.hbm2ddl.auto'"
+  },
+  {
+    "name": "spring.datasource-primary.show-sql",
+    "type": "java.lang.String",
+    "description": "A description for 'spring.datasource-primary.show-sql'"
+  },
+  {
+    "name": "spring.datasource-secondary.database-platform",
+    "type": "java.lang.String",
+    "description": "A description for 'spring.datasource-secondary.database-platform'"
+  },
+  {
+    "name": "spring.datasource-secondary.hbm2ddl.auto",
+    "type": "java.lang.String",
+    "description": "A description for 'spring.datasource-secondary.hbm2ddl.auto'"
+  },
+  {
+    "name": "spring.datasource-secondary.show-sql",
+    "type": "java.lang.String",
+    "description": "A description for 'spring.datasource-secondary.show-sql'"
+  },
+  {
+    "name": "spring.datasource-primary.url",
+    "type": "java.lang.String",
+    "description": "A description for 'spring.datasource-primary.url'"
+  },
+  {
+    "name": "spring.datasource-primary.username",
+    "type": "java.lang.String",
+    "description": "A description for 'spring.datasource-primary.username'"
+  },
+  {
+    "name": "spring.datasource-primary.password",
+    "type": "java.lang.String",
+    "description": "A description for 'spring.datasource-primary.password'"
+  },
+  {
+    "name": "spring.datasource-primary.driver-class-name",
+    "type": "java.lang.String",
+    "description": "A description for 'spring.datasource-primary.driver-class-name'"
+  },
+  {
+    "name": "spring.datasource-secondary.url",
+    "type": "java.lang.String",
+    "description": "A description for 'spring.datasource-secondary.url'"
+  },
+  {
+    "name": "spring.datasource-secondary.username",
+    "type": "java.lang.String",
+    "description": "A description for 'spring.datasource-secondary.username'"
+  },
+  {
+    "name": "spring.datasource-secondary.password",
+    "type": "java.lang.String",
+    "description": "A description for 'spring.datasource-secondary.password'"
+  },
+  {
+    "name": "spring.datasource-secondary.driver-class-name",
+    "type": "java.lang.String",
+    "description": "A description for 'spring.datasource-secondary.driver-class-name'"
+  }
+]}

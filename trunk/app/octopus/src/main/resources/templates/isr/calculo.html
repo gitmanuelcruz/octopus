@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title th:text="${titulo}">Insert title here</title>
+<link rel="icon" type="image/x-icon" th:href="@{/images/calculator-icon.png}">
+<link rel="stylesheet" th:href="@{/css/bootstrap5/bootstrap.min.css}">
+<link rel="stylesheet" th:href="@{/css/sweetalert2/sweetalert2.min.css}">
+
+</head>
+<body>
+	<section class="container">
+		<h5 class="fst-italic my-2">C&aacute;lculo de Isr art&iacute;culo 96</h5>
+		<div class="card my-3">
+			<div class="card-header">Datos para realizar el c&aacute;lculo</div>
+			<div class="card-body">
+				<div class="form-group row">
+					<span class="col-md-2">Ejercicio Fiscal</span>
+					<div class="col-md-10">
+						<select class="custom-select" name="efiscal" id="efiscal">
+							<option th:value="''" th:text="'Seleccione'"></option>
+							<option th:each="option:${anios}"
+								th:value="${option.idEjercicioFiscal}"
+								th:text="${option.nombreEjercicioFiscal}"></option>
+						</select>
+					</div>
+				</div>
+				<div class="form-group row my-2">
+					<span class="col-md-2">Periodo</span>
+					<div class="col-md-10">
+						<select class="custom-select" name="tipo_calculo"
+							id="tipo_calculo">
+							<option th:value="''" th:text="'Seleccione'"></option>
+							<option th:each="option:${periodos}"
+								th:value="${option.idTipoCalculo}"
+								th:text="${option.nombreTipoCalculo}"></option>
+						</select>
+					</div>
+				</div>
+				<div class="form-group row my-2">
+					<span class="col-md-2">Importe</span>
+					<div class="col-md-4">
+						<input class="form-control" type="text" name="importe"
+							id="importe" th:value="0">
+					</div>
+				</div>
+				<div class="form-group row my-3">
+					<span class="col-md-2"></span>
+					<div class="col-md-4">
+						<button class="btn btn-md btn-primary" id="btnCalcula">Calcular
+							Impuesto</button>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-md-6">
+				<div class="card">
+					<div class="card-header">
+						<span>Impuesto Calculado</span>
+					</div>
+					<div class="card-body">
+						<div class="form-group row">
+							<div class="col-md-6">
+								<span>Ingreso Gravable:</span>
+							</div>
+							<div class="col-md-6 text-end">
+								<span id="sueldo"></span>
+							</div>
+						</div>
+						<div class="form-group row my-2">
+							<div class="col-md-6">
+								<span>( - ) Limite Inferior:</span>
+							</div>
+							<div class="col-md-6 text-end">
+								<span id="limiteInferior"></span>
+							</div>
+						</div>
+						<div class="form-group row my-2">
+							<div class="col-md-6">
+								<span>( = ) Diferencia:</span>
+							</div>
+							<div class="col-md-6 text-end">
+								<span id="diferencia"></span>
+							</div>
+						</div>
+						<div class="form-group row my-2">
+							<div class="col-md-6">
+								<span>( * ) tasa:</span>
+							</div>
+							<div class="col-md-6 text-end">
+								<span id="tasa"></span>
+							</div>
+						</div>
+						<div class="form-group row my-2">
+							<div class="col-md-6">
+								<span>( = ) Impuesto Marginal:</span>
+							</div>
+							<div class="col-md-6 text-end">
+								<span id="impuestoMarginal"></span>
+							</div>
+						</div>
+						<div class="form-group row my-2">
+							<div class="col-md-6">
+								<span>( + ) Cuota Fija:</span>
+							</div>
+							<div class="col-md-6 text-end">
+								<span id="cuotaFija"></span>
+							</div>
+						</div>
+						<div class="form-group row my-2">
+							<div class="col-md-6">
+								<span>( = ) Impuesto Previo:</span>
+							</div>
+							<div class="col-md-6 text-end">
+								<span id="impuestoPrevio"></span>
+							</div>
+						</div>
+						<div class="form-group row my-2">
+							<div class="col-md-6">
+								<span>( - ) Subsidio calculado:</span>
+							</div>
+							<div class="col-md-6 text-end">
+								<span id="subsidioCalculado"></span>
+							</div>
+						</div>
+						<div class="form-group row my-2">
+							<div class="col-md-6">
+								<span>( = ) Impuesto a retener:</span>
+							</div>
+							<div class="col-md-6 text-end">
+								<span class="negrita" id="impuestoRetener"></span>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- fin card -->
+			</div>
+			<div class="col-md-6">
+				<table class="table table-striped">
+					<thead>
+						<tr>
+							<th align="center">L&iacute;mite Inferior</th>
+							<th align="center">L&iacute;mite Superior</th>
+							<th align="center">Cuota Fija</th>
+							<th align="center">Porcentaje Excedente</th>
+						</tr>
+					</thead>
+					<tbody id="tablaIsr">
+					
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</section>
+	<input type="hidden" id="urlAjax" th:value="@{'/isr/'}" />
+	<script th:src="@{/js/boostrap5/bootstrap.min.js}"></script>
+	<script th:src="@{/js/jquery-3.6.0.min.js}"></script>
+	<script th:src="@{/js/sweetalert2/sweetalert2.min.js}"></script>
+	<script th:src="@{/js/octopus.js}"></script>
+	<javascript th:replace="isr/js/isr :: javascript"></javascript>
+
+</body>
+</html>

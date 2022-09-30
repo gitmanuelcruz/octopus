@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<body>
+	<script type="text/javascript" th:fragment="javascript">
+	$(document).ready(function() {
+		$("#btnCalcula").click(function(){
+			CalcularImpuesto();
+		});
+	});
+	
+	function CalcularImpuesto(){
+		var mensaje = "";
+		if($("#efiscal").val() =="")
+			mensaje +="* Ejercicio Fiscal<br>";
+		if($("#tipo_calculo").val()=="")
+			mensaje += "* Tipo de Calculo<br>";
+		if($("#importe").val() == 0 || $("#importe").val()=="" )
+			mensaje += "* Importe<br>";
+		if(mensaje.length>0){
+			Swal.fire ({ 
+				title:"Campos Requeridos<br>", 
+				icon:"error",
+				//text:"Campos requeridos",
+				html:mensaje
+				});
+		}else{
+			realizarCalculo();
+		}
+	}
+	function realizarCalculo(){
+		var anio = $("#efiscal").val();
+		var tipoCalculo=$("#tipo_calculo").val();
+		var importe = $("#importe").val();
+		importe = parseFloat(importe.replace(/[^0-9\.]/g, '')); // elimino cualquier cosa que no sea numero o punto
+		
+		var urlAjax = $("#urlAjax").val();
+		
+		$.ajax({
+		       url:urlAjax+"getTabulador/"+anio+"/"+tipoCalculo+"/"+importe,
+		       type: "post",
+		       async : true,
+		       dataType:'json',
+		       data: "",
+		       cache: false,
+		       contentType: false,
+		       processData: false
+		   })
+		   .done(function(data){
+			   $("#sueldo").html(number_format(data.ingresoGravable,2));
+			   $("#limiteInferior").html(number_format(data.limiteInferior,2));
+			   $("#diferencia").html(number_format(data.diferencia,2));
+			   $("#tasa").html(data.tasa);
+			   $("#impuestoMarginal").html(number_format(data.impuestoMarginal,2));
+			   $("#cuotaFija").html(number_format(data.cuotaFija,2));
+			   $("#impuestoPrevio").html(number_format(data.impuestoPrevio,2));
+			   $("#subsidioCalculado").html(number_format(data.subsidioEmpleo,2));
+			   $("#impuestoRetener").html(number_format(data.impuestoRetener,2));
+		      //console.log(data);
+		      getTabla(anio,tipoCalculo,data.idTablaIsr);
+		   });
+	}
+	
+	function getTabla(anio,tipoCalculo,idTabla){
+		var urlAjax = $("#urlAjax").val();
+		$.ajax({
+		       url: urlAjax +"tabla/"+anio+"/"+tipoCalculo,
+		       type: "post",
+		       async : true,
+		       dataType:'json',
+		       data: "",
+		       cache: false,
+		       contentType: false,
+		       processData: false
+		   })
+		   .done(function(data){
+		      //console.log(data);
+		      $("#tablaIsr").html("");
+		      $.each(data,function(i, item){
+		    	 var seleccionado = (item.idTablaIsr==idTabla)?"class='sombreado'":"";
+		    	 var tr = "<tr "+seleccionado+">"
+		    	 	+ "<td align='right'>"+number_format(item.limiteInferior,2)+"</td>"
+		    	 	+ "<td align='right'>"+number_format(item.limiteSuperior,2)+"</td>"
+		    	  	+ "<td align='right'>"+number_format(item.cuotaFija,2)+"</td>"
+		    	  	+ "<td align='right'>"+number_format(item.porcentajeExcedente,2)+"</td></tr>";
+		    	  
+		    	$("#tablaIsr").append(tr);
+		    	 
+		      })
+		   });
+	}
+	</script>
+</body>
+</html>
